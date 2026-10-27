@@ -2,7 +2,7 @@
   "id": "./",
   "name": "MoviCerca - Transporte cercano",
   "short_name": "MoviCerca",
-  "description": "Encuentra estaciones cercanas y explora transporte en CDMX. Datos de muestra, sin disponibilidad en vivo.",
+  "description": "Encuentra estaciones cercanas y explora transporte en CDMX. Cobertura parcial, sin disponibilidad en vivo.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
