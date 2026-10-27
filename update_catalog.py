@@ -26,7 +26,7 @@ def fetch(url, params):
         with urllib.request.urlopen(request, timeout=40) as response:
             body = response.read()
         result = json.loads(body)
-        if 'status' in result or 'messages' in result:
+    if 'status' in result or 'messages' in result:
         raise RuntimeError(
             f"Respuesta del servidor: "
             f"status={result.get('status')}, "
