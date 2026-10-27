@@ -3,7 +3,7 @@
 Only writes data when both layers pass sanity checks. Python standard library only.
 """
 import json, pathlib, urllib.parse, urllib.request, datetime, sys
-ROOT=pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parent
 BASE='https://serviciosatlas.sgirpc.cdmx.gob.mx/arcgis/rest/services/AtlasCapasPublicas/Movilidad_Integrada_CDMX/FeatureServer'
 LAYERS=[(0,'metro','Metro'),(2,'metrobus','Metrobús')]
 def fetch(url,params):
