@@ -26,6 +26,12 @@ def fetch(url, params):
         with urllib.request.urlopen(request, timeout=40) as response:
             body = response.read()
         result = json.loads(body)
+        if 'status' in result or 'messages' in result:
+        raise RuntimeError(
+            f"Respuesta del servidor: "
+            f"status={result.get('status')}, "
+            f"messages={result.get('messages')}"
+        )
     except (urllib.error.URLError, ValueError) as exc:
         raise RuntimeError(f'No fue posible consultar {url}: {exc}') from exc
     if 'error' in result:
