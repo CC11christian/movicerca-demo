@@ -1,5 +1,5 @@
 // MoviCerca v0.9: cache solo de interfaz local. No guarda coordenadas ni archivos importados.
-const CACHE='movicerca-shell-v14';
+const CACHE='movicerca-shell-v15';
 const SHELL=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('movicerca-shell-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
