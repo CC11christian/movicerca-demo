@@ -1,4 +1,4 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MoviCerca · MVP v1.9 CDMX</title><meta name="theme-color" content="#09629c"><meta name="description" content="Explora opciones de transporte cercanas en Ciudad de México con fuentes identificadas."><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" href="./icons/icon-192.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""><style>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MoviCerca · MVP v2.0 CDMX</title><meta name="theme-color" content="#09629c"><meta name="description" content="Explora opciones de transporte cercanas en Ciudad de México con fuentes identificadas."><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" href="./icons/icon-192.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""><style>
 :root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#183445;background:#f0f5f8}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1050px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.logo{font-size:25px;font-weight:850;color:#09629c}.tag{padding:7px 11px;background:#dceef8;border-radius:20px;font-size:12px}h1{font-size:clamp(25px,4vw,40px);line-height:1.13;margin:27px 0 10px}p{line-height:1.5}.muted{color:#617581}.panel{background:white;border:1px solid #dae5eb;border-radius:18px;padding:19px;margin:17px 0;box-shadow:0 6px 22px #1234}.warn{padding:13px 14px;border-left:4px solid #deaa43;background:#fff6e5;border-radius:8px;font-size:13px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:end}label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}select,input{width:100%;padding:11px;border:1px solid #b9cbd5;border-radius:9px;font:inherit;background:white}button,.btn{border:0;border-radius:10px;background:#086aa7;color:white;padding:11px 13px;font:inherit;font-size:14px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-block}button.secondary,.btn.secondary{background:#e7f0f6;color:#125d84}button.active{background:#085985;color:white}.filters{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}.filters button{background:#ebf3f7;color:#36586d}.filters button.active{background:#075d96;color:white}.results{max-height:490px;overflow:auto}.item{border-top:1px solid #e1e9ed;padding:12px 0;display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center}.ico{background:#e5f2f8;border-radius:10px;width:34px;height:34px;display:grid;place-items:center}.item b{display:block}.sm{font-size:12px;color:#617581;margin-top:3px}.dist{text-align:right;font-weight:750;white-space:nowrap}.item a{font-size:12px;color:#075d9f}.map{height:345px;background:#edf5f5;border:1px solid #cadce1;border-radius:13px;overflow:hidden;position:relative}.map > svg.movicerca-fallback-svg{width:100%;height:100%;display:block}.foot{font-size:12px;color:#617581}.stats{display:flex;gap:12px;margin:10px 0}.stat{flex:1;background:#edf5f9;padding:12px;border-radius:12px;font-size:13px}.stat strong{font-size:23px;display:block}.field{flex:1;min-width:170px}.hide{display:none}.status{font-size:13px;margin-top:8px;color:#3c6374}details{margin-top:15px}summary{cursor:pointer;font-weight:700}@media(max-width:740px){.two{grid-template-columns:1fr}.wrap{padding:12px}.panel{padding:14px}.top{align-items:start}.map{height:260px}.logo{font-size:22px}}
  .leaflet-container{font:inherit}.maphint{font-size:12px;color:#617581}.controls.compact{margin:10px 0}.pill{padding:6px 10px;background:#e5f2f8;border-radius:99px;font-size:12px}.map{height:420px}@media(max-width:740px){.map{height:315px}} .installbtn{display:none}.offline{display:none;margin-top:12px;padding:12px;border-radius:10px;background:#fff4df;color:#684c18}@media(display-mode:standalone){.installbtn{display:none!important}}
 /* v0.6: prioridad visual para móvil; el mapa no está cubierto por paneles */
@@ -16,7 +16,7 @@
 .address-line{flex-wrap:wrap}.address-line #clearAddress{background:#e7f0f6;color:#125d84}.search-feedback{font-size:12px;margin:6px 0;color:#3c6374}@media(max-width:740px){.address-line input{flex:1 1 100%}.address-line button{flex:1}}
 
 .operational{margin-top:11px;padding:12px;background:white;border:1px solid #d8e5ec;border-radius:11px}.operational h4{margin:0 0 7px}.operational p{font-size:13px;margin:7px 0}.operational .status-unknown{display:inline-block;background:#e9edf1;color:#40505e;padding:4px 8px;border-radius:9px;font-weight:700}.operational a{color:#075d9f}.operational small{color:#5c7282}.operational .check{border-top:1px solid #ecf0f2;padding-top:8px;margin-top:8px}
-</style><script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script></head><body><main class="wrap"><header class="top"><div class="logo">◉ MoviCerca</div><span class="tag">PWA experimental · v1.9 · Catálogo y rutas</span></header><h1>Encuentra transporte cerca de ti</h1><div class="controls"><button id="install" class="installbtn" type="button">Instalar MoviCerca</button><span class="pill" id="network">Comprobando conexión…</span></div><div class="offline" id="offlineNote" role="status">Sin conexión: la interfaz y las estaciones de muestra pueden seguir disponibles. Los mapas de calles, enlaces y servicios externos requieren internet.</div><div class="warn"><b>Cobertura incompleta:</b> esta versión usa el catálogo local generado por GitHub (Metro y Metrobús); si aún no está generado conserva las estaciones de referencia e intenta consultar ocho capas del Atlas público de CDMX (Metro, Metrobús, RTP, Trolebús, Tren Ligero, Cablebús, ECOBICI y transporte concesionado). RTP, Trolebús, Tren Ligero, Cablebús, ECOBICI y concesionado se consultan como fuentes complementarias y pueden no responder; aún no hay catálogo local validado para estas modalidades. Abre «Diagnóstico por modalidad» para ver los resultados. Las distancias son <b>en línea recta</b>, no rutas a pie. Los pagos se muestran por operador con enlaces oficiales. Los estados son desconocidos hasta disponer de una fuente actualizada; no hay llegadas en vivo ni alertas conectadas. El mapa de calles requiere internet y, en un producto comercial, un proveedor de mapas adecuado. Verifica los datos antes de viajar.</div><section class="panel primary-panel"><div class="address-search"><label for="address">Buscar calle, dirección o lugar</label><div class="address-line"><input id="address" type="search" placeholder="Calle, colonia, C.P. y ciudad (o lugar)" autocomplete="street-address" enterkeyhint="search"><button id="findAddress" type="button">Buscar</button><button id="clearAddress" class="secondary" type="button" aria-label="Borrar dirección">✕ Borrar</button></div><div class="status" id="addressStatus" role="status">La búsqueda utiliza Nominatim y envía la dirección al proveedor. No se guarda en MoviCerca.</div></div><div class="controls location-controls"><div class="field"><label for="zone">Selecciona una zona</label><select id="zone"><option value="insurgentes">Glorieta de Insurgentes</option><option value="bellas">Bellas Artes</option><option value="zocalo">Zócalo</option><option value="chilpancingo">Chilpancingo</option><option value="polanco">Polanco</option><option value="talisman">Talismán</option><option value="manual">Punto elegido en el mapa</option></select></div><button id="geo" type="button">⌖ Detectar mi ubicación</button><button class="secondary" id="reset">Restablecer</button></div><details id="manual" class="hide" style="margin-top:12px"><summary>Coordenadas (opción avanzada)</summary><div class="controls"><div class="field"><label for="lat">Latitud</label><input id="lat" type="number" step="any" value="19.42365"></div><div class="field"><label for="lng">Longitud</label><input id="lng" type="number" step="any" value="-99.16329"></div><button id="apply">Usar coordenadas</button></div></details><div class="status" id="status" role="status">Zona de referencia seleccionada; no se utiliza tu ubicación personal.</div><div class="filters" id="filters" aria-label="Filtros de transporte"><button class="active" data-mode="all">Todos</button><button data-mode="metro">Metro</button><button data-mode="metrobus">Metrobús</button><button data-mode="rtp">RTP</button><button data-mode="trolebus">Trolebús</button><button data-mode="trenligero">Tren Ligero</button><button data-mode="cablebus">Cablebús</button><button data-mode="ecobici">ECOBICI</button><button data-mode="concesionado">Concesionado</button><button data-mode="gtfs">GTFS importado</button><button data-mode="private">Taxi y apps</button></div><div class="controls compact"><div class="field"><label for="radius">Radio de búsqueda</label><select id="radius"><option value="500">500 metros</option><option value="1000">1 kilómetro</option><option value="2000" selected>2 kilómetros</option><option value="5000">5 kilómetros</option><option value="20000">20 kilómetros</option><option value="999999">Sin límite</option></select></div><span class="pill" id="dataBadge">Estaciones verificadas · cargando catálogo</span></div><div class="controls"><button type="button" class="secondary" id="retrySources">↻ Reintentar fuentes de transporte</button></div><details><summary>Diagnóstico por modalidad</summary><p id="layerDiagnostics" class="sm">Sin resultados todavía.</p></details><p class="status" id="coverageStatus" role="status">Comprobando cobertura por modalidad. La ausencia de datos no indica ausencia de transporte.</p><div class="two"><div class="map-column"><div class="map-settings"><label for="basemap">Fondo del mapa</label><select id="basemap" aria-label="Seleccionar fondo"><option value="osm">Calles (OpenStreetMap)</option><option value="none">Solo estaciones (sin imágenes externas)</option></select></div><div class="status" id="mapNote" role="status" style="margin:0 0 6px;font-size:11px">Si el fondo muestra imágenes extrañas, selecciona «Solo estaciones».</div><div class="map" id="map" role="img" aria-label="Mapa interactivo con estaciones y origen seleccionado"></div><p class="foot">Mapa de calles de referencia cuando hay conexión. Si aparecen cuadros extraños, cambia «Fondo del mapa» a «Solo estaciones». Haz clic en cualquier punto del mapa para mover el origen. <b>Las distancias siguen siendo en línea recta</b>. Si el mapa externo no carga, se muestra un esquema de respaldo.</p></div><div><div class="stats"><div class="stat"><strong id="count">—</strong>paradas mostradas (en radio)</div><div class="stat"><strong id="nearest">—</strong>más cercana (recta)</div></div><h3>Alternativas cerca de ti</h3><div class="results" id="results" aria-live="polite"></div><section id="stationDetail" class="station-detail hide" aria-live="polite" aria-label="Detalles de la estación"></section></div></div></section><section class="panel"><h2>Servicios privados</h2><p class="muted">No podemos confirmar qué vehículos están cerca. Puedes consultar directamente con cada proveedor.</p><div class="controls"><a class="btn secondary" href="https://m.uber.com/" target="_blank" rel="noopener">Consultar Uber ↗</a><a class="btn secondary" href="https://www.didiglobal.com/mx/" target="_blank" rel="noopener">Consultar DiDi ↗</a></div><details><summary>Importar un catálogo GTFS de paradas (avanzado)</summary><p class="sm">Carga preferentemente un ZIP GTFS autorizado, o utiliza <code>stops.txt</code> de forma avanzada. Se importan identificador, nombre y coordenadas. Los registros importados se muestran como «GTFS» salvo cuando la agencia haya sido clasificada en una fase posterior. Puedes importar cualquier feed GTFS válido, bajo su licencia correspondiente.</p><label for="gtfszip">Importar GTFS ZIP oficial (recomendado)</label><input id="gtfszip" type="file" accept=".zip,application/zip"><p class="sm">Lee los archivos stops.txt, routes.txt, trips.txt y stop_times.txt del ZIP. Puede tardar en equipos modestos. Es una carga local: no envía el archivo a MoviCerca.</p><input id="file" type="file" accept=".txt,.csv,text/csv"><p class="status" id="fileStatus"></p><p class="sm">Para descargar el catálogo oficial visita <a href="https://datos.cdmx.gob.mx/dataset/gtfs" target="_blank" rel="noopener">Datos Abiertos CDMX</a>. Consulta las condiciones de reutilización y atribución de la versión descargada.</p></details></section><section class="panel"><h2>Fuentes y límites</h2><p>Las coordenadas iniciales provienen de fichas públicas de estaciones en <a href="https://mbus.mx/cdmx/metro/estacion/insurgentes/">Insurgentes</a>, <a href="https://mbus.mx/cdmx/metro/estacion/bellas-artes/">Bellas Artes</a>, <a href="https://mbus.mx/cdmx/metro/estacion/hidalgo/">Hidalgo</a>, <a href="https://mbus.mx/cdmx/metro/estacion/chilpancingo/">Chilpancingo</a>, <a href="https://mbus.mx/cdmx/metro/estacion/zocalo/">Zócalo</a> y <a href="https://mbus.mx/cdmx/metrobus/estacion/bellas-artes/">Metrobús Bellas Artes</a>. Para la red completa se requiere integrar y auditar el GTFS de SEMOVI, comprobar actualidad y licencia por conjunto.</p><p class="foot">Privacidad: la posición geográfica se utiliza exclusivamente en tu navegador para calcular cercanía; no se almacena ni envía a un servidor de MoviCerca. Los enlaces externos tienen sus propias políticas. La geolocalización y la instalación requieren generalmente HTTPS o localhost; además necesitan permisos y servicios de ubicación activados. La búsqueda de dirección comparte el texto consultado con Nominatim. El mapa y Leaflet dependen de servicios externos. La PWA no guarda tu ubicación ni datos importados. No uses esta prueba para tomar decisiones críticas de viaje.</p></section><p class="foot">MoviCerca · Prueba técnica v1.8 · 27 octubre 2026</p></main><script>
+</style><script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script></head><body><main class="wrap"><header class="top"><div class="logo">◉ MoviCerca</div><span class="tag">PWA experimental · v2.1 · ECOBICI GBFS</span></header><h1>Encuentra transporte cerca de ti</h1><div class="controls"><button id="install" class="installbtn" type="button">Instalar MoviCerca</button><span class="pill" id="network">Comprobando conexión…</span></div><div class="offline" id="offlineNote" role="status">Sin conexión: la interfaz y las estaciones de muestra pueden seguir disponibles. Los mapas de calles, enlaces y servicios externos requieren internet.</div><div class="warn"><b>Cobertura incompleta:</b> esta versión usa el catálogo local generado por GitHub (Metro y Metrobús); si aún no está generado conserva las estaciones de referencia e intenta consultar ocho capas del Atlas público de CDMX (Metro, Metrobús, RTP, Trolebús, Tren Ligero, Cablebús, ECOBICI y transporte concesionado). RTP, Trolebús, Tren Ligero, Cablebús y concesionado se consultan como fuentes complementarias; ECOBICI usa su feed GBFS oficial y pueden no responder; aún no hay catálogo local validado para estas modalidades. Consulta «Estado de las fuentes» para ver qué datos se han cargado. Las distancias son <b>en línea recta</b>, no rutas a pie. Los pagos se muestran por operador con enlaces oficiales. Los estados son desconocidos hasta disponer de una fuente actualizada; no hay llegadas en vivo ni alertas conectadas. El mapa de calles requiere internet y, en un producto comercial, un proveedor de mapas adecuado. Verifica los datos antes de viajar.</div><section class="panel primary-panel"><div class="address-search"><label for="address">Buscar calle, dirección o lugar</label><div class="address-line"><input id="address" type="search" placeholder="Calle, colonia, C.P. y ciudad (o lugar)" autocomplete="street-address" enterkeyhint="search"><button id="findAddress" type="button">Buscar</button><button id="clearAddress" class="secondary" type="button" aria-label="Borrar dirección">✕ Borrar</button></div><div class="status" id="addressStatus" role="status">La búsqueda utiliza Nominatim y envía la dirección al proveedor. No se guarda en MoviCerca.</div></div><div class="controls location-controls"><div class="field"><label for="zone">Selecciona una zona</label><select id="zone"><option value="insurgentes">Glorieta de Insurgentes</option><option value="bellas">Bellas Artes</option><option value="zocalo">Zócalo</option><option value="chilpancingo">Chilpancingo</option><option value="polanco">Polanco</option><option value="talisman">Talismán</option><option value="manual">Punto elegido en el mapa</option></select></div><button id="geo" type="button">⌖ Detectar mi ubicación</button><button class="secondary" id="reset">Restablecer</button></div><details id="manual" class="hide" style="margin-top:12px"><summary>Coordenadas (opción avanzada)</summary><div class="controls"><div class="field"><label for="lat">Latitud</label><input id="lat" type="number" step="any" value="19.42365"></div><div class="field"><label for="lng">Longitud</label><input id="lng" type="number" step="any" value="-99.16329"></div><button id="apply">Usar coordenadas</button></div></details><div class="status" id="status" role="status">Zona de referencia seleccionada; no se utiliza tu ubicación personal.</div><div class="filters" id="filters" aria-label="Filtros de transporte"><button class="active" data-mode="all">Todos</button><button data-mode="metro">Metro</button><button data-mode="metrobus">Metrobús</button><button data-mode="rtp">RTP</button><button data-mode="trolebus">Trolebús</button><button data-mode="trenligero">Tren Ligero</button><button data-mode="cablebus">Cablebús</button><button data-mode="ecobici">ECOBICI</button><button data-mode="concesionado">Concesionado</button><button data-mode="gtfs">GTFS importado</button><button data-mode="private">Taxi y apps</button></div><div class="controls compact"><div class="field"><label for="radius">Radio de búsqueda</label><select id="radius"><option value="500">500 metros</option><option value="1000">1 kilómetro</option><option value="2000" selected>2 kilómetros</option><option value="5000">5 kilómetros</option><option value="20000">20 kilómetros</option><option value="999999">Sin límite</option></select></div><span class="pill" id="dataBadge">Estaciones verificadas · cargando catálogo</span></div><div class="controls"><button type="button" class="secondary" id="retrySources">↻ Reintentar fuentes de transporte</button></div><details><summary>Estado de las fuentes</summary><p id="layerDiagnostics" class="sm">Sin resultados todavía.</p></details><p class="status" id="coverageStatus" role="status">Comprobando cobertura por modalidad. La ausencia de datos no indica ausencia de transporte.</p><div class="two"><div class="map-column"><div class="map-settings"><label for="basemap">Fondo del mapa</label><select id="basemap" aria-label="Seleccionar fondo"><option value="osm">Calles (OpenStreetMap)</option><option value="none">Solo estaciones (sin imágenes externas)</option></select></div><div class="status" id="mapNote" role="status" style="margin:0 0 6px;font-size:11px">Si el fondo muestra imágenes extrañas, selecciona «Solo estaciones».</div><div class="map" id="map" role="img" aria-label="Mapa interactivo con estaciones y origen seleccionado"></div><p class="foot">Mapa de calles de referencia cuando hay conexión. Si aparecen cuadros extraños, cambia «Fondo del mapa» a «Solo estaciones». Haz clic en cualquier punto del mapa para mover el origen. <b>Las distancias siguen siendo en línea recta</b>. Si el mapa externo no carga, se muestra un esquema de respaldo.</p></div><div><div class="stats"><div class="stat"><strong id="count">—</strong>paradas mostradas (en radio)</div><div class="stat"><strong id="nearest">—</strong>más cercana (recta)</div></div><h3>Alternativas cerca de ti</h3><div class="results" id="results" aria-live="polite"></div><section id="stationDetail" class="station-detail hide" aria-live="polite" aria-label="Detalles de la estación"></section></div></div></section><section class="panel"><h2>Servicios privados</h2><p class="muted">No podemos confirmar qué vehículos están cerca. Puedes consultar directamente con cada proveedor.</p><div class="controls"><a class="btn secondary" href="https://m.uber.com/" target="_blank" rel="noopener">Consultar Uber ↗</a><a class="btn secondary" href="https://www.didiglobal.com/mx/" target="_blank" rel="noopener">Consultar DiDi ↗</a></div><details><summary>Importar un catálogo GTFS de paradas (avanzado)</summary><p class="sm">Carga preferentemente un ZIP GTFS autorizado, o utiliza <code>stops.txt</code> de forma avanzada. Se importan identificador, nombre y coordenadas. Los registros importados se muestran como «GTFS» salvo cuando la agencia haya sido clasificada en una fase posterior. Puedes importar cualquier feed GTFS válido, bajo su licencia correspondiente.</p><label for="gtfszip">Importar GTFS ZIP oficial (recomendado)</label><input id="gtfszip" type="file" accept=".zip,application/zip"><p class="sm">Lee los archivos stops.txt, routes.txt, trips.txt y stop_times.txt del ZIP. Puede tardar en equipos modestos. Es una carga local: no envía el archivo a MoviCerca.</p><input id="file" type="file" accept=".txt,.csv,text/csv"><p class="status" id="fileStatus"></p><p class="sm">Para descargar el catálogo oficial visita <a href="https://datos.cdmx.gob.mx/dataset/gtfs" target="_blank" rel="noopener">Datos Abiertos CDMX</a>. Consulta las condiciones de reutilización y atribución de la versión descargada.</p></details></section><section class="panel"><h2>Fuentes y límites</h2><p>Las coordenadas iniciales provienen de fichas públicas de estaciones en <a href="https://mbus.mx/cdmx/metro/estacion/insurgentes/">Insurgentes</a>, <a href="https://mbus.mx/cdmx/metro/estacion/bellas-artes/">Bellas Artes</a>, <a href="https://mbus.mx/cdmx/metro/estacion/hidalgo/">Hidalgo</a>, <a href="https://mbus.mx/cdmx/metro/estacion/chilpancingo/">Chilpancingo</a>, <a href="https://mbus.mx/cdmx/metro/estacion/zocalo/">Zócalo</a> y <a href="https://mbus.mx/cdmx/metrobus/estacion/bellas-artes/">Metrobús Bellas Artes</a>. Para la red completa se requiere integrar y auditar el GTFS de SEMOVI, comprobar actualidad y licencia por conjunto.</p><p class="foot">Privacidad: la posición geográfica se utiliza exclusivamente en tu navegador para calcular cercanía; no se almacena ni envía a un servidor de MoviCerca. Los enlaces externos tienen sus propias políticas. La geolocalización y la instalación requieren generalmente HTTPS o localhost; además necesitan permisos y servicios de ubicación activados. La búsqueda de dirección comparte el texto consultado con Nominatim. El mapa y Leaflet dependen de servicios externos. La PWA no guarda tu ubicación ni datos importados. No uses esta prueba para tomar decisiones críticas de viaje.</p></section><p class="foot">MoviCerca · Prueba técnica v2.1 · 27 octubre 2026</p></main><script>
 'use strict';
 const base=[
 {id:'M1',name:'Metro Insurgentes',type:'metro',line:'Línea 1',lat:19.42365,lng:-99.16329,source:'https://mbus.mx/cdmx/metro/estacion/insurgentes/'},
@@ -43,6 +43,7 @@ const OPERATOR_INFO={
  metrobus:{payments:['Tarjeta de Movilidad Integrada (MI)','Tarjetas bancarias sin contacto y billeteras compatibles donde estén habilitadas'],paymentSource:'https://www.metrobus.cdmx.gob.mx/',alerts:'https://www.metrobus.cdmx.gob.mx/',paymentReviewed:'2026-10-27'}
 };
 function operationalDetails(station){
+ if(station.type==='ecobici')return ecobiciTravelDetails(station);
  const data=OPERATOR_INFO[station.type];
  const payments=data?data.payments.map(x=>'<li>'+esc(x)+'</li>').join(''):'<li>Medio de pago pendiente de verificar para esta ruta u operador.</li>';
  const reference=data?'<a href="'+esc(data.paymentSource)+'" target="_blank" rel="noopener noreferrer">Fuente oficial de pagos ↗</a>':'No hay fuente de pagos integrada para esta modalidad.';
@@ -55,6 +56,66 @@ function operationalDetails(station){
  '<small>Los medios de pago son generales por operador, no confirmación del validador de esta estación. Información revisada '+(data?data.paymentReviewed:'sin fecha de verificación')+'. Una fuente sin datos no significa que la estación esté cerrada.</small></section>';
 }
 
+// ECOBICI GBFS: station_information + station_status se relacionan por station_id.
+// No se publica disponibilidad si la respuesta está caducada o incompleta.
+const ECOBICI_GBFS='https://gbfs.mex.lyftbikes.com/gbfs/gbfs.json';
+const ECOBICI_MAX_AGE=900; // 15 minutos; umbral prudente, no garantia de frescura
+function ecobiciTravelDetails(station){
+ const age=Number.isFinite(station.gbfsUpdated)?Math.max(0,Math.floor(Date.now()/1000-station.gbfsUpdated)):Infinity;
+ const valid=age<=ECOBICI_MAX_AGE && station.gbfsStatusKnown===true;
+ const available=valid && station.gbfsOperational && station.gbfsRenting;
+ const docks=valid && station.gbfsOperational && station.gbfsReturning;
+ const freshness=Number.isFinite(age)?('Hace '+Math.round(age/60)+' min'):'Sin fecha';
+ return '<section class="operational"><h4>Disponibilidad ECOBICI</h4>'+ 
+ '<p><b>Estado:</b> '+(valid?(station.gbfsOperational?'Reportada operativa':'Reportada fuera de servicio'):'Sin información vigente')+'</p>'+ 
+ '<p><b>Bicicletas:</b> '+(available?esc(station.gbfsBikes):'No disponible')+'</p>'+ 
+ '<p><b>Anclajes libres:</b> '+(docks?esc(station.gbfsDocks):'No disponible')+'</p>'+ 
+ '<p><b>Actualización:</b> '+esc(freshness)+(valid?' (datos GBFS)':' (sin confirmación en vivo)')+'</p>'+ 
+ '<p><b>Uso/pago:</b> Se requiere cuenta y plan ECOBICI; desbloqueo con la aplicación o Tarjeta MI vinculada según condiciones del operador.</p>'+ 
+ '<p><a href="https://ecobici.cdmx.gob.mx/datos-abiertos/" target="_blank" rel="noopener noreferrer">Fuente oficial de datos ↗</a></p></section>';
+}
+function gbfsFeedUrls(payload){
+ const feeds=[];
+ const data=payload?.data||{};
+ if(Array.isArray(data.feeds))feeds.push(...data.feeds);
+ for(const v of Object.values(data))if(v&&Array.isArray(v.feeds))feeds.push(...v.feeds);
+ const byName=Object.fromEntries(feeds.filter(f=>f?.name&&/^https:\/\//.test(f.url||'')).map(f=>[f.name,f.url]));
+ return byName;
+}
+async function gbfsJSON(url){
+ const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),12000);
+ try{
+  const response=await fetch(url,{cache:'no-store',signal:controller.signal});
+  if(!response.ok)throw Error('HTTP '+response.status);
+  return await response.json();
+ }finally{clearTimeout(timer)}
+}
+async function loadEcobiciGBFS(){
+ const discovery=await gbfsJSON(ECOBICI_GBFS);
+ const urls=gbfsFeedUrls(discovery);
+ if(!urls.station_information||!urls.station_status)throw Error('El índice GBFS no incluye station_information y station_status');
+ const [info,status]=await Promise.all([gbfsJSON(urls.station_information),gbfsJSON(urls.station_status)]);
+ const infoRows=info?.data?.stations,statusRows=status?.data?.stations;
+ if(!Array.isArray(infoRows)||!Array.isArray(statusRows))throw Error('Respuesta GBFS sin estaciones');
+ const statusMap=new Map(statusRows.map(st=>[String(st.station_id),st]));
+ const updated=Number(status.last_updated||0);
+ const records=[];
+ for(const st of infoRows){
+  const id=String(st.station_id??'');const lat=Number(st.lat),lng=Number(st.lon);
+  if(!id||!Number.isFinite(lat)||!Number.isFinite(lng)||lat<19||lat>19.7||lng < -99.4||lng > -98.7)continue;
+  const current=statusMap.get(id);
+  const stationUpdated=Number(current?.last_reported||updated);
+  records.push({id:'gbfs-ecobici-'+id,name:'ECOBICI '+String(st.name||id),type:'ecobici',line:'Cicloestación '+id,lat,lng,
+   source:'https://ecobici.cdmx.gob.mx/mapa/',gbfsUpdated:stationUpdated,
+   gbfsStatusKnown:!!current && Number.isFinite(stationUpdated)&&stationUpdated>0,
+   gbfsBikes:Number.isInteger(current?.num_bikes_available)?current.num_bikes_available:null,
+   gbfsDocks:Number.isInteger(current?.num_docks_available)?current.num_docks_available:null,
+   gbfsOperational:current?.is_installed===1&&current?.is_renting===1&&current?.is_returning===1,
+   gbfsRenting:current?.is_renting===1,gbfsReturning:current?.is_returning===1});
+ }
+ if(records.length<10)throw Error('Datos ECOBICI insuficientes para mostrar cobertura');
+ return records;
+}
 function showStation(id){
  const s=stops.find(x=>String(x.id)===String(id));if(!s)return;
  lastDetailId=s.id;
@@ -142,7 +203,7 @@ $('#address').addEventListener('keydown',event=>{if(event.key==='Enter'){event.p
 // Capas públicas del Atlas de Movilidad CDMX (FeatureServer, consulta en tiempo de ejecución).
 // NO hay horarios ni disponibilidad en vivo. Cada capa se muestra solo si responde.
 const ATLAS='https://serviciosatlas.sgirpc.cdmx.gob.mx/arcgis/rest/services/AtlasCapasPublicas/Movilidad_Integrada_CDMX/FeatureServer/';
-const PUBLIC_LAYERS=[[0,'metro','Metro'],[2,'metrobus','Metrobús'],[4,'rtp','RTP'],[6,'trolebus','Trolebús'],[8,'trenligero','Tren Ligero'],[10,'cablebus','Cablebús'],[12,'ecobici','ECOBICI'],[15,'concesionado','Transporte concesionado']];
+const PUBLIC_LAYERS=[[0,'metro','Metro'],[2,'metrobus','Metrobús'],[4,'rtp','RTP'],[6,'trolebus','Trolebús'],[8,'trenligero','Tren Ligero'],[10,'cablebus','Cablebús'],[15,'concesionado','Transporte concesionado']];
 const MAX_PER_LAYER=15000;
 let importedStops=[];
 let lastCoverage=[];
@@ -195,7 +256,7 @@ async function loadStaticCatalog(){
   const valid=data.stations.filter(s=>s.name&&['metro','metrobus'].includes(s.type)&&Number.isFinite(s.lat)&&Number.isFinite(s.lng)&&s.lat>19&&s.lat<19.7&&s.lng > -99.4&&s.lng< -98.7);
   if(valid.length<200)throw Error('No pasó los controles de calidad');
   staticCatalog=valid;
-  stops=base.concat(staticCatalog,importedStops);
+  stops=base.concat(staticCatalog,...[...remoteByType.values()],importedStops);
   const when=data.generated_at?new Date(data.generated_at).toLocaleString('es-MX'):'fecha no disponible';
   badge.textContent=valid.length+' estaciones en catálogo local · '+when;
   $('#coverageStatus').textContent='Catálogo local de Metro y Metrobús: '+valid.length+' registros. Generado: '+when+'. Fuente: Atlas CDMX. Estado del servicio y horarios NO disponibles; la información puede estar desactualizada.';
@@ -206,28 +267,52 @@ async function loadStaticCatalog(){
   return false;
  }
 }
-async function cargarEstacionesOficiales(){
- const badge=$('#dataBadge');badge.textContent='Cargando fuentes oficiales por modalidad…';
- const catalog=[];const successful=[];const failed=[];lastCoverage=[];
- // Each layer fails independently; one unavailable source must not hide others.
- const responses=await Promise.allSettled(PUBLIC_LAYERS.map(async([layer,type,label])=>{
-  const records=await loadLayer(layer,type);
-  if(!records.length)throw Error('Sin puntos utilizables');
-  return {label,records};
- }));
- responses.forEach((r,i)=>{if(r.status==='fulfilled'){
-   successful.push(r.value.label);catalog.push(...r.value.records);lastCoverage.push({label:r.value.label,count:r.value.records.length})
-  }else{failed.push(PUBLIC_LAYERS[i][2]);lastCoverage.push({label:PUBLIC_LAYERS[i][2],error:String(r.reason?.message||r.reason).slice(0,90)});console.warn('No se pudo consultar',PUBLIC_LAYERS[i][2],r.reason)}
- });
- if(catalog.length){
-  // Nunca sustituir puntos de referencia probados por coordenadas de otra capa.
-  // IDs propios evitan colisiones y preservan los registros de respaldo.
-  stops=base.concat(staticCatalog).concat(catalog).concat(importedStops);
- }
- badge.textContent=catalog.length.toLocaleString('es-MX')+' puntos de fuentes consultadas · '+successful.length+'/8 modalidades cargadas · '+importedStops.length+' importadas';
- $('#coverageStatus').textContent='Con datos: '+(successful.join(', ')||'ninguna')+'. Sin respuesta o registros: '+(failed.join(', ')||'ninguna')+'. El catálogo puede no reflejar cambios recientes. La ausencia de puntos no significa que no exista transporte. Para cobertura amplia, importa GTFS ZIP.';
- $('#layerDiagnostics').textContent=coverageSummary();
+// v2.0: carga progresiva. Cada fuente que llega se presenta de inmediato.
+// La clave de generación impide que una carga anterior sobreescriba una nueva.
+let sourceGeneration=0;
+let sourcesInProgress=false;
+let remoteByType=new Map();
+function rebuildTransportStops(){
+ const external=[...remoteByType.values()].flat();
+ stops=base.concat(staticCatalog,external,importedStops);
  render();
+}
+function refreshSourcesUI(states){
+ lastCoverage=states.map(x=>({label:x.label,count:x.count,error:x.error,loading:x.state==='loading'}));
+ const ready=states.filter(x=>x.state==='ok'),pending=states.filter(x=>x.state==='loading'),failed=states.filter(x=>x.state==='error');
+ const count=ready.reduce((n,x)=>n+x.count,0);
+ $('#dataBadge').textContent=staticCatalog.length+' Metro/Metrobús en catálogo · '+count+' externos · '+pending.length+' fuentes cargando';
+ $('#coverageStatus').textContent=(pending.length?'Cargando '+pending.map(x=>x.label).join(', ')+'. ':'')+'Datos disponibles de '+(ready.map(x=>x.label).join(', ')||'fuentes complementarias aún no cargadas')+'. '+(failed.length?'Sin datos en '+failed.map(x=>x.label).join(', ')+'. ':'')+'La ausencia de puntos no significa que no exista transporte.';
+ $('#layerDiagnostics').textContent=states.map(x=>x.label+': '+(x.state==='loading'?'cargando…':x.state==='ok'?x.count+' puntos':x.error)).join(' · ');
+ const btn=$('#retrySources');btn.disabled=pending.length>0;btn.textContent=pending.length?'Cargando '+pending.length+' fuentes…':'↻ Reintentar fuentes de transporte';
+}
+async function cargarEstacionesOficiales(){
+ const generation=++sourceGeneration;
+ remoteByType=new Map();
+ sourcesInProgress=true;
+ const states=PUBLIC_LAYERS.map(([layer,type,label])=>({layer,type,label,count:0,state:'loading',error:null}));
+ states.push({layer:null,type:'ecobici',label:'ECOBICI (GBFS)',count:0,state:'loading',error:null});
+ refreshSourcesUI(states);
+ rebuildTransportStops();
+ await Promise.allSettled(states.map(async state=>{
+  try{
+   const records=state.type==='ecobici'?await loadEcobiciGBFS():await loadLayer(state.layer,state.type);
+   if(generation!==sourceGeneration)return;
+   if(!records.length)throw Error('Sin puntos utilizables');
+   remoteByType.set(state.type,records);
+   state.count=records.length;state.state='ok';
+  }catch(error){
+   if(generation!==sourceGeneration)return;
+   state.state='error';state.error=String(error?.message||error).slice(0,100);
+   console.warn('Fuente no disponible:',state.label,error);
+  }finally{
+   if(generation===sourceGeneration){
+    refreshSourcesUI(states);
+    rebuildTransportStops();
+   }
+  }
+ }));
+ if(generation===sourceGeneration){sourcesInProgress=false;refreshSourcesUI(states)}
 }
 $('#retrySources').addEventListener('click',cargarEstacionesOficiales);$('#radius').addEventListener('change',render);$('#zone').addEventListener('change',e=>{let z=e.target.value;$('#manual').classList.toggle('hide',z!=='manual');if(zones[z]){if(Number($('#radius').value)<5000)$('#radius').value='5000';mode='all';document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('active',x.dataset.mode==='all'));origin=zones[z];$('#status').textContent='Zona de referencia seleccionada; no se utiliza tu ubicación personal.';render()}});$('#apply').addEventListener('click',()=>{let a=Number($('#lat').value),b=Number($('#lng').value);if(!Number.isFinite(a)||!Number.isFinite(b)||a < -90||a>90||b < -180||b>180){$('#status').textContent='Coordenadas no válidas.';return}origin=[a,b];$('#status').textContent='Origen manual aplicado.';render()});$('#geo').addEventListener('click',()=>{
  const status=$('#status');
@@ -285,7 +370,7 @@ $('#gtfszip').addEventListener('change',async event=>{
  }catch(e){status.textContent='Error al importar ZIP: '+e.message;console.error(e)}
 });
 
-render();loadStaticCatalog().then(ok=>{if(!ok)cargarEstacionesOficiales()});
+render();loadStaticCatalog().finally(()=>{cargarEstacionesOficiales()});
 // PWA: instalar solo mediante acción voluntaria del usuario y en contexto admitido.
 let deferredInstallPrompt=null;
 const installButton=$('#install');
