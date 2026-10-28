@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate a conservative *optional* snapshot for additional mobility modes.
 
-No synthetic stations; never overwrite a prior good snapshot if any required layer fails.
+No synthetic stations; retain prior good entries if individual layers fail.
 This is a point catalog only, not a routing or live-status feed.
 """
 import datetime, json, pathlib, sys, urllib.parse, urllib.request
@@ -51,16 +51,58 @@ def load(layer,typ):
     return entries,len(ids)
 
 def main():
-    stations=[];counts={}
-    for layer,typ in LAYERS:
-        records,source_count=load(layer,typ)
-        stations+=records;counts[typ]={'points':len(records),'source_records':source_count,'layer':layer}
-        print(f'{typ}: {len(records)} verified points from {source_count} records',flush=True)
-    payload={'schema_version':1,'generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':BASE,'coverage':'partial; named point features only; no live status, arrivals or payment verification','counts':counts,'stations':stations}
-    destination=ROOT/'data'/'stations_secondary_cdmx.json'
-    destination.parent.mkdir(parents=True,exist_ok=True)
-    destination.write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf8')
-    print(f'Additional catalog generated: {len(stations)} points at {destination}',flush=True)
-if __name__=='__main__':
-    try:main()
-    except Exception as e:print('Secondary catalog NOT updated:',e,file=sys.stderr);sys.exit(1)
+    destination = ROOT / 'data' / 'stations_secondary_cdmx.json'
+    prior = {}
+    if destination.exists():
+        try:
+            raw = json.loads(destination.read_text(encoding='utf8'))
+            for item in raw.get('stations', []):
+                if item.get('type') in {t for _, t in LAYERS} and item.get('id'):
+                    prior.setdefault(item['type'], []).append(item)
+        except (OSError, ValueError, TypeError):
+            print('WARNING: Existing catalog could not be read; no old data reused.', flush=True)
+    stations = []
+    counts = {}
+    successes = 0
+    for layer, typ in LAYERS:
+        try:
+            records, source_count = load(layer, typ)
+        except Exception as exc:
+            preserved = prior.get(typ, [])
+            stations.extend(preserved)
+            counts[typ] = {
+                'points': len(preserved), 'layer': layer,
+                'status': 'stale' if preserved else 'unavailable',
+                'error': str(exc)[:250]
+            }
+            print(f'WARNING {typ}: {exc}. Previous records retained: {len(preserved)}', flush=True)
+            continue
+        successes += 1
+        stations.extend(records)
+        counts[typ] = {'points': len(records), 'source_records': source_count,
+                       'layer': layer, 'status': 'updated'}
+        print(f'{typ}: {len(records)} verified point records', flush=True)
+    if successes == 0:
+        raise RuntimeError('No modalities supplied new verified points. Catalog unchanged.')
+    if not stations:
+        raise RuntimeError('Catalog has no stations. Refusing to publish.')
+    payload = {
+        'schema_version': 1,
+        'generated_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        'source': BASE,
+        'coverage': 'PARTIAL; only verified named point features; some modalities may be stale or unavailable',
+        'counts': counts,
+        'stations': stations
+    }
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    tmp = destination.with_suffix('.json.tmp')
+    tmp.write_text(json.dumps(payload, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf8')
+    tmp.replace(destination)
+    print(f'Additional catalog generated: {len(stations)} points at {destination}', flush=True)
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as exc:
+        print('Secondary catalog NOT updated:', exc, file=sys.stderr)
+        sys.exit(1)
