@@ -1,0 +1,33 @@
+
+name: Actualizar catalogo adicional CDMX
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 10 * * 3'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validar y generar puntos adicionales
+        run: python scripts/update_secondary_catalog.py
+
+      - name: Guardar solo un catalogo generado correctamente
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/stations_secondary_cdmx.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Actualizar catalogo adicional CDMX"
+            git push
+          fi
